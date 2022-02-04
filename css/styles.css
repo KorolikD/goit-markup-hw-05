@@ -35,6 +35,7 @@ Roboto – 400, 500, 700, 900 */
   --primary-background-color: #ffffff;
   --light-background-color: #f5f4fa;
   --dark-background-color: #2f303a;
+  --project-background-color: rgba(33, 150, 243, 0.9);
 
   --button-text-colour: #ffffff;
   --button-secondary-background-colour: #f5f4fa;
@@ -94,6 +95,8 @@ body {
   display: inline-block;
 
   text-decoration: none;
+
+  /* user-select: none; */
 }
 
 .button {
@@ -111,6 +114,8 @@ body {
   color: var(--title-text-color);
   background-color: var(--primary-background-color);
   cursor: pointer;
+
+  /* user-select: none; */
 }
 
 .title {
@@ -164,6 +169,10 @@ header {
   display: flex;
 }
 
+.site-nav-item {
+  position: relative;
+}
+
 .site-nav-item:not(:last-child) {
   margin-right: 50px;
 }
@@ -178,6 +187,8 @@ header {
   letter-spacing: 0.02em;
 
   color: var(--title-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-nav .link:hover,
@@ -187,6 +198,35 @@ header {
 
 .site-nav .link.current {
   color: var(--accent-color);
+}
+
+.site-nav .link.current::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+
+  display: block;
+  height: 4px;
+  width: 100%;
+
+  background-color: var(--accent-color);
+  border-radius: 2px;
+
+  animation: moveCurrentDecoration 350ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes moveCurrentDecoration {
+  0% {
+    transform: scaleX(0);
+    transform-origin: center left;
+    opacity: 0;
+  }
+
+  100% {
+    transform: scaleX(1);
+    transform-origin: center left;
+    opacity: 1;
+  }
 }
 
 .contact {
@@ -209,6 +249,8 @@ header {
   letter-spacing: 0.02em;
 
   color: var(--primary-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-icon {
@@ -269,6 +311,8 @@ header {
   color: var(--button-text-colour);
   background-color: var(--accent-color);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button.primary:hover,
@@ -344,7 +388,28 @@ header {
 }
 
 .service .service-item {
+  position: relative;
+
   flex-basis: 370px;
+}
+
+.service-item .title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.14;
+  text-align: center;
+  text-transform: uppercase;
+
+  color: var(--dark-text-color);
+  background-color: rgba(47, 48, 58, 0.8);
 }
 
 .service .service-item:not(:last-child) {
@@ -424,6 +489,9 @@ header {
   border-radius: 50%;
 
   color: var(--icon-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-natwork-list .icon {
@@ -459,9 +527,13 @@ header {
   align-items: center;
   width: 100%;
   height: 100%;
+
   border: 1px solid var(--icon-color);
   border-radius: 4px;
   color: var(--icon-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .clients .icon {
@@ -506,6 +578,8 @@ header {
   line-height: 1.71;
 
   color: var(--dark-text-color);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .address .link.contact {
@@ -548,6 +622,10 @@ header {
 .button.secondary {
   color: var(--title-text-color);
   background-color: var(--button-secondary-background-colour);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button.secondary:hover,
@@ -584,10 +662,45 @@ header {
   margin-left: 30px;
 }
 
+.project-item .link {
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .project-item .link:hover,
 .project-item .link:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+.product-wraper {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-description {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  padding: 0 24px;
+  font-size: 18px;
+  line-height: 1.56;
+  color: #ffffff;
+
+  background-color: var(--project-background-color);
+
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.project-item .link:hover .project-description,
+.project-item .link:focus .project-description {
+  transform: translateY(0);
 }
 
 .project-container {
@@ -611,4 +724,78 @@ header {
   line-height: 1.88;
 
   color: var(--primary-text-color);
+}
+
+/* ---------------------------------------------------------------- */
+/* --------------------Модальное окно-------------------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+
+  background-color: rgba(0, 0, 0, 0.2);
+
+  opacity: 1;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ! При вимкненні з'явиться модалка */
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal-form {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.modal-form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  width: 528px;
+  min-height: 581px;
+
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  background: #ffffff;
+
+  transform: translate(-50%, -50%) scale(1);
+
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+
+  width: 30px;
+  height: 30px;
+
+  background-color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.close-button:hover,
+.close-button:focus {
+  fill: var(--accent-color);
 }
